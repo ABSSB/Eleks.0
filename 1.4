@@ -1,0 +1,24 @@
+import sys
+import math
+
+if len(sys.argv) < 5:
+    print("Usage: python angle.py x1 y1 x2 y2")
+    sys.exit(1)
+x1 = float(sys.argv[1])
+y1 = float(sys.argv[2])
+x2 = float(sys.argv[3])
+y2 = float(sys.argv[4])
+
+theta_AO = math.atan2(y1, x1)
+theta_BO = math.atan2(y2, x2)
+
+theta_AO_degrees = math.degrees(theta_AO)
+theta_BO_degrees = math.degrees(theta_BO)
+
+print(f"The angle of AO with the X-axis is {theta_AO_degrees:.2f} degrees")
+print(f"The angle of BO with the X-axis is {theta_BO_degrees:.2f} degrees")
+
+if theta_AO > theta_BO:
+    print("Segment AO makes a bigger angle with the X-axis")
+else:
+    print("Segment BO makes a bigger angle with the X-axis")
