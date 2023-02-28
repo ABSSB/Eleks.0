@@ -1,0 +1,27 @@
+import sys
+if len(sys.argv) != 4:
+    print("Usage: python count_word.py word mode file")
+    sys.exit(1)
+word = sys.argv[1]
+mode = sys.argv[2]
+filename = sys.argv[3]
+
+try:
+    with open(filename, 'r') as file:
+        text = file.read()
+except FileNotFoundError:
+    print(f"File '{filename}' not found.")
+    sys.exit(1)
+
+count = 0
+if mode == "partial":
+    for sentence in text.split('.'):
+        if word in sentence:
+            count += sentence.count(word)
+elif mode == "exact":
+    for sentence in text.split('.'):
+        words = sentence.strip().split()
+        if word in words:
+            count += words.count(word)
+
+print(f"Number of occurrences of '{word}': {count}")
