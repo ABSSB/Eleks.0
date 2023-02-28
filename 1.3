@@ -1,0 +1,15 @@
+import sys
+
+if len(sys.argv) < 2:
+    print("Usage: python fibonacci.py index")
+    sys.exit(1)
+n = int(sys.argv[1])
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+fibonacci_number = fibonacci(n)
+
+print(f"The {n}th Fibonacci number is {fibonacci_number}")
