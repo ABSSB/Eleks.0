@@ -1,0 +1,11 @@
+import math
+
+row_number = int(input("Enter row number: "))
+
+
+row = []
+for k in range(row_number + 1):
+    value = math.comb(row_number, k)
+    row.append(value)
+
+print(row)
