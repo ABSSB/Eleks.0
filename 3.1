@@ -1,0 +1,74 @@
+import random
+
+N = int(input("Enter matrix size: "))
+x, y = map(int, input("Enter entrance coordinates (x y): ").split())
+
+matrix = [['.' for i in range(N)] for j in range(N)]
+entrance = (x, y)
+exit = (random.randint(0, N-1), random.randint(0, N-1))
+
+for i in range(N):
+    row = input().split()
+    for j in range(N):
+        matrix[i][j] = row[j]
+
+def move_right(x, y):
+    y += 1
+    if y >= N or matrix[x][y] == '|':
+        return False, x, y-1
+    elif matrix[x][y] == '\\':
+        return move_down(x, y)
+    elif matrix[x][y] == '/':
+        return move_up(x, y)
+    else:
+        return True, x, y
+
+def move_left(x, y):
+    y -= 1
+    if y < 0 or matrix[x][y] == '|':
+        return False, x, y+1
+    elif matrix[x][y] == '\\':
+        return move_up(x, y)
+    elif matrix[x][y] == '/':
+        return move_down(x, y)
+    else:
+        return True, x, y
+
+def move_down(x, y):
+    x += 1
+    if x >= N or matrix[x][y] == '_':
+        return False, x-1, y
+    elif matrix[x][y] == '\\':
+        return move_right(x, y)
+    elif matrix[x][y] == '/':
+        return move_left(x, y)
+    else:
+        return True, x, y
+
+def move_up(x, y):
+    x -= 1
+    if x < 0 or matrix[x][y] == '_':
+        return False, x+1, y
+    elif matrix[x][y] == '\\':
+        return move_left(x, y)
+    elif matrix[x][y] == '/':
+        return move_right(x, y)
+    else:
+        return True, x, y
+
+x, y = entrance
+direction = move_right
+
+while (x, y) != exit:
+    success, x, y = direction(x, y)
+    if not success:
+        print("Stuck!")
+        break
+    else:
+        matrix[x][y] = '0'
+        for row in matrix:
+            print(' '.join(row))
+        print()
+
+for row in matrix:
+    print(' '.join(row))
