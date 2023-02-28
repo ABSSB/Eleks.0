@@ -1,0 +1,15 @@
+import sys
+
+if len(sys.argv) < 3:
+    print("Usage: python combine.py array1 array2 ...")
+    sys.exit(1)
+arrays = []
+for i in range(1, len(sys.argv)):
+    arrays.append(list(map(int, sys.argv[i].split(','))))
+combined = []
+for arr in arrays:
+    combined += arr
+
+combined = list(set(filter(lambda x: x % 5 != 0, combined)))
+combined.sort()
+print(combined)
