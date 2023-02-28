@@ -1,0 +1,20 @@
+def max_people_awake(time_awake, events):
+    max_people = 0
+    for event in events:
+        start_time, end_time, commute_time = event
+        if start_time >= time_awake:
+            people = (end_time - start_time - commute_time) // 100
+            if people > max_people:
+                max_people = people
+    return max_people
+
+awake_time = int(input("Enter the time you wake up (in hhmm format): "))
+num_events = int(input("Enter the number of events: "))
+
+events = []
+for i in range(num_events):
+    start_time, end_time, commute_time = input(f"Enter start time, end time, and commute time (in hhmm format) for event {i+1}: ").split()
+    events.append((int(start_time), int(end_time), int(commute_time)))
+
+max_people = max_people_awake(awake_time, events)
+print(f"The maximum number of people that can attend any event after {awake_time} is {max_people}.")
